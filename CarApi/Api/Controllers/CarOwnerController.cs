@@ -17,7 +17,7 @@ public class CarOwnerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("public/user")]
+    [Route("public/owners")]
     [ProducesResponseType<CarOwnerInfoResponse>(200)]
     public async Task<IActionResult> GetInfoAsync([FromQuery] Guid userId)
     {
@@ -26,7 +26,7 @@ public class CarOwnerController : ControllerBase
     }
 
     [HttpPost]
-    [Route("public/user")]
+    [Route("public/owners")]
     [ProducesResponseType(typeof(CreateUserResponse), 200)]
     public async Task<ActionResult> CreateUserAsync([FromBody] CreateCarOwnerRequest dto)
     {
@@ -46,7 +46,7 @@ public class CarOwnerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("public/user/{ownerId}/cars")]
+    [Route("public/owners/{ownerId}/cars")]
     [ProducesResponseType<OwnerWithCarsResponse>(200)]
     public async Task<ActionResult> GetAsync([FromRoute] Guid ownerId)
     {
