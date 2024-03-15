@@ -9,4 +9,6 @@ public interface IUserRepository
     Task<Guid> CreateUserAsync(CarOwnerDal carOwner);
 
     Task<CarOwnerDal> GetAllOwnerCars(Guid owner);
+
+    Task<CarOwnerDal[]> GetUsersWithId(Guid[] guidList);
 }
