@@ -32,4 +32,9 @@ internal class CarOwnerRepository : IUserRepository
             .Where(o => o.Id == ownerId)
             .SingleAsync();
     }
+
+    public async Task<CarOwnerDal[]> GetUsersWithId(Guid[] guidList)
+    {
+        return await carInfoContext.CarOwners.Where(u => guidList.Contains(u.Id)).ToArrayAsync();
+    }
 }

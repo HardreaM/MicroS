@@ -56,4 +56,19 @@ internal class UserLogicManager : IUserLogicManager
             Login = ownerDal.Login, Phone = ownerDal.Phone, Cars = cars
         };
     }
+
+    public async Task<CarOwnerLogic[]> GetUsersWithId(Guid[] guidList)
+    {
+        var users = await _userRepository.GetUsersWithId(guidList);
+
+        return users.Select(u => new CarOwnerLogic
+        {
+            Id = u.Id,
+            Name = u.Name,
+            Surname = u.Surname,
+            Login = u.Login,
+            Email = u.Email,
+            Phone = u.Phone
+        }).ToArray();
+    }
 }
