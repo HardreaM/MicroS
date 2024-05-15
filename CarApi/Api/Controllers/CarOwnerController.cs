@@ -2,7 +2,9 @@
 using CarApi.Controllers.User.Responses;
 using Logic.Cars.Interfaces;
 using Logic.Cars.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using SagaContracts.ChangeUserNameSaga;
 
 namespace CarApi.Controllers;
 
@@ -10,10 +12,12 @@ namespace CarApi.Controllers;
 public class CarOwnerController : ControllerBase
 {
     private readonly IUserLogicManager _userLogicManager;
+    private readonly IBus bus;
 
-    public CarOwnerController(IUserLogicManager userLogicManager)
+    public CarOwnerController(IUserLogicManager userLogicManager, IBus bus)
     {
         _userLogicManager = userLogicManager;
+        this.bus = bus;
     }
 
     [HttpGet]
@@ -31,6 +35,15 @@ public class CarOwnerController : ControllerBase
             Email = userInfo.Email,
             Phone = userInfo.Phone
         });
+    }
+    
+    [HttpPost]
+    [Route("public/owners/{userId}/{userName}")]
+    [ProducesResponseType<CarOwnerInfoResponse>(200)]
+    public async Task<IActionResult> ChangeUserName([FromRoute] Guid userId, [FromRoute] string userName)
+    { 
+        await bus.Request<ChangeUserNameSagaRequest, ChangeUserNameSagaResponse>(new {userId, userName});
+        return Ok();
     }
 
     [HttpPost]
