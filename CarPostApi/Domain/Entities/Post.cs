@@ -11,7 +11,7 @@ public partial record Post : BaseEntityDal<Guid>
     /// </summary>
     public required Guid UserId { get; init; }
     
-    [NotMapped]
+    //[NotMapped]
     public CreatedPostUserInfo UserInfo { get; init; }
 
     public required Guid CarId { get; init; }

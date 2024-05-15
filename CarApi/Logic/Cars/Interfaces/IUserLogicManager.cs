@@ -11,4 +11,6 @@ public interface IUserLogicManager
     Task<CarOwnerLogic> GetOwnerCars(Guid ownerId);
 
     Task<CarOwnerLogic[]> GetUsersWithId(Guid[] guidList);
+
+    Task<CarOwnerLogic> ChangeUserNameById(Guid userId, string newName);
 }

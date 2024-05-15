@@ -11,4 +11,6 @@ public interface IUserRepository
     Task<CarOwnerDal> GetAllOwnerCars(Guid owner);
 
     Task<CarOwnerDal[]> GetUsersWithId(Guid[] guidList);
+
+    Task<CarOwnerDal> ChangeUserNameById(Guid userId, string newName);
 }

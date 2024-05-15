@@ -1,6 +1,8 @@
+using Domain.Entities;
+
 namespace Domain.Interfaces;
 
 public interface ICheckUser
 {
-    Task CheckUserExistAsync(Guid userId);
+    Task<CreatedPostUserInfo> CheckUserExistAsync(Guid userId);
 }

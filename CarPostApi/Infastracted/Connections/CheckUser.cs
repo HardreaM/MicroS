@@ -1,3 +1,4 @@
+using Domain.Entities;
 using Domain.Interfaces;
 using ProfileConnectionLib.ConnectionServices.DtoModels.CheckUserExists;
 using ProfileConnectionLib.ConnectionServices.Interfaces;
@@ -17,11 +18,13 @@ internal class CheckUser : ICheckUser
         _profileConnectionServcie = profileConnectionServcie;
     }
 
-    public async Task CheckUserExistAsync(Guid userId)
+    public async Task<CreatedPostUserInfo> CheckUserExistAsync(Guid userId)
     {
-        await _profileConnectionServcie.CheckUserExistAsync(new CheckUserExistProfileApiRequest
+        var res = await _profileConnectionServcie.CheckUserExistAsync(new CheckUserExistProfileApiRequest
         {
             UserId = userId
         });
+
+        return new CreatedPostUserInfo { Name = res.Name, Surname = res.Surname };
     }
 }
