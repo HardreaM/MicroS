@@ -9,4 +9,6 @@ public interface IUserLogicManager
     Task<Guid> CreateUserAsync(CarOwnerLogic carOwner);
 
     Task<CarOwnerLogic> GetOwnerCars(Guid ownerId);
+
+    Task<CarOwnerLogic[]> GetUsersWithId(Guid[] guidList);
 }

@@ -17,12 +17,38 @@ public class CarOwnerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("public/owners")]
+    [Route("public/owners/{userId}")]
     [ProducesResponseType<CarOwnerInfoResponse>(200)]
-    public async Task<IActionResult> GetInfoAsync([FromQuery] Guid userId)
+    public async Task<IActionResult> GetInfoAsync([FromRoute] Guid userId)
     {
         var userInfo = await _userLogicManager.GetUserInfoAsync(userId);
-        return Ok(userInfo);
+        return Ok(new CarOwnerInfoResponse
+        {
+            Id = userInfo.Id,
+            Name = userInfo.Name,
+            Surname = userInfo.Surname,
+            Login = userInfo.Login,
+            Email = userInfo.Email,
+            Phone = userInfo.Phone
+        });
+    }
+
+    [HttpPost]
+    [Route("public/owners/byId")]
+    [ProducesResponseType<CarOwnerInfoResponse[]>(200)]
+    public async Task<ActionResult> GetOwnersListAsync([FromBody] UserNameListByIdRequest request)
+    {
+        var users = await _userLogicManager.GetUsersWithId(request.guids);
+
+        return Ok(users.Select(u => new CarOwnerInfoResponse
+        {
+            Id = u.Id,
+            Name = u.Name,
+            Surname = u.Surname,
+            Login = u.Login,
+            Email = u.Email,
+            Phone = u.Phone
+        }).ToArray());
     }
 
     [HttpPost]
