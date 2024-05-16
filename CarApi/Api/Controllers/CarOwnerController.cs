@@ -42,7 +42,9 @@ public class CarOwnerController : ControllerBase
     [ProducesResponseType<CarOwnerInfoResponse>(200)]
     public async Task<IActionResult> ChangeUserName([FromRoute] Guid userId, [FromRoute] string userName)
     { 
-        await bus.Request<ChangeUserNameSagaRequest, ChangeUserNameSagaResponse>(new {userId, userName});
+        var response = await bus.Request<ChangeUserNameSagaRequest, ChangeUserNameSagaResponse>(new {userId, userName});
+        if (response.Message.IsFaulted)
+            return BadRequest();
         return Ok();
     }
 
