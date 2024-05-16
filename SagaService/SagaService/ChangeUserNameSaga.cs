@@ -16,6 +16,7 @@ public class ChangeUserNameSaga : MassTransitStateMachine<ChangeUserNameSagaStat
         get;
         set;
     }
+    public Event RollbackRequested { get; set; }
     public State Failed { get; set; }
     
     public ChangeUserNameSaga()
@@ -69,10 +70,12 @@ public class ChangeUserNameSaga : MassTransitStateMachine<ChangeUserNameSagaStat
                 .Finalize(),
             
             When(ChangeCarPostService.Faulted)
+                .Request(ChangeCarPostService, x => x.Init<IChangeUserNameCarPostServiceRequest>(new { userId = x.Saga.RequestId, userName = x.Saga.NewName}))
                 .ThenAsync(async context => await RespondFromSaga(context, "Faulted On Change Car Post Service" + string.Join("; ", context.Data.Exceptions.Select(x => x.Message)), true))
                 .TransitionTo(Failed),
             
             When(ChangeCarPostService.TimeoutExpired)
+                .Request(ChangeCarPostService, x => x.Init<IChangeUserNameCarPostServiceRequest>(new { userId = x.Saga.RequestId, userName = x.Saga.NewName}))
                 .ThenAsync(async context =>
                 {
                     await RespondFromSaga(context, "Timeout Expired On Change Car Post Service", true);
