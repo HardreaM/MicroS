@@ -21,8 +21,8 @@ internal class CreatePost : ICreatePost
 
     public async Task<Guid> CreatePostAsync(Post post)
     {
-        await _checkUser.CheckUserExistAsync(post.UserId);
-        var newPost = post with { Id = new Guid() };
+        var user = await _checkUser.CheckUserExistAsync(post.UserId);
+        var newPost = post with { Id = new Guid(), UserInfo = user};
         await _storePost.AddPost(newPost);
         return newPost.Id;
     }

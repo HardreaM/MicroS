@@ -71,4 +71,18 @@ internal class UserLogicManager : IUserLogicManager
             Phone = u.Phone
         }).ToArray();
     }
+
+    public async Task<CarOwnerLogic> ChangeUserNameById(Guid userId, string newName)
+    {
+        var user = await _userRepository.ChangeUserNameById(userId, newName);
+        return new CarOwnerLogic
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Surname = user.Surname,
+            Login = user.Login,
+            Email = user.Email,
+            Phone = user.Phone
+        };
+    }
 }

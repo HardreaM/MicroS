@@ -38,4 +38,14 @@ internal class PostRepository : IStorePost
 
         return post;
     }
+
+    public async Task<Post> ChangeUserNameById(Guid userId, string userName)
+    {
+        var post = await postContext.Posts.SingleAsync(p => p.UserId == userId);
+        var newPost = post with { UserInfo = post.UserInfo with { Name = userName} };
+        postContext.Entry(post).CurrentValues.SetValues(newPost);
+        await postContext.SaveChangesAsync();
+
+        return newPost;
+    }
 }

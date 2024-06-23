@@ -37,4 +37,14 @@ internal class CarOwnerRepository : IUserRepository
     {
         return await carInfoContext.CarOwners.Where(u => guidList.Contains(u.Id)).ToArrayAsync();
     }
+
+    public async Task<CarOwnerDal> ChangeUserNameById(Guid userId, string newName)
+    {
+        var user = await carInfoContext.CarOwners.FindAsync(userId);
+        var newUser = user with { Name = newName };
+        carInfoContext.Entry(user).CurrentValues.SetValues(newUser);
+        await carInfoContext.SaveChangesAsync();
+        
+        return newUser;
+    }
 }

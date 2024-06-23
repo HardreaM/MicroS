@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileConnectionLib", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{AF06E22D-AB99-4B80-802B-BD97068FAFE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaContracts", "..\Libs\SagaContracts\SagaContracts.csproj", "{499226C4-3424-4DF2-A863-72D5A01FAC0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +46,14 @@ Global
 		{AF06E22D-AB99-4B80-802B-BD97068FAFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF06E22D-AB99-4B80-802B-BD97068FAFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF06E22D-AB99-4B80-802B-BD97068FAFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499226C4-3424-4DF2-A863-72D5A01FAC0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499226C4-3424-4DF2-A863-72D5A01FAC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499226C4-3424-4DF2-A863-72D5A01FAC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499226C4-3424-4DF2-A863-72D5A01FAC0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FB4E48C2-DD93-4821-A4DE-D49464CFDCF1} = {E71AFEE6-D9CF-43C0-8F37-FC5F2F15164F}
 		{484A54F8-2841-4508-90E3-D0F635B621F5} = {E71AFEE6-D9CF-43C0-8F37-FC5F2F15164F}
+		{499226C4-3424-4DF2-A863-72D5A01FAC0E} = {E71AFEE6-D9CF-43C0-8F37-FC5F2F15164F}
 	EndGlobalSection
 EndGlobal
